@@ -2,14 +2,14 @@ import sys
 
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5 import uic
+from UI import Ui_MainWindow
 from random import randint
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.run)
         self.flag = False
 
@@ -21,8 +21,8 @@ class MyWidget(QMainWindow):
             qp.end()
 
     def draw_flag(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
         for i in range(5):
+            qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
             x = randint(100, 600)
             y = randint(0, 400)
             r = randint(50, 200)
